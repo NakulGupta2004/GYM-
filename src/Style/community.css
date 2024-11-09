@@ -1,0 +1,372 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  body {
+    background-color: #111317;
+    color: #ffffff;
+    line-height: 1.7;
+    font-size: 16px;
+  }
+  
+  /* Section Container */
+  .section__container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 6rem 0;
+  }
+  
+  /* Section Header */
+  .section__header {
+    font-size: 3rem;
+    font-weight: 600;
+    color: #f9ac54;
+    margin-bottom: 1rem;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  
+  .section__subheader {
+    font-size: 1.2rem;
+    color: #a0a0a0;
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+  
+  /* About Grid */
+  .about__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+  }
+  
+  /* About Card */
+  .about__card {
+    background-color: #1a1d24;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .about__card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(249, 172, 84, 0.2);
+  }
+  
+  .card__image-container {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .about__card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  
+  .about__card:hover img {
+    transform: scale(1.1);
+  }
+  
+  .card__content {
+    padding: 2rem;
+  }
+  
+  .about__card h4 {
+    font-size: 1.8rem;
+    color: #f9ac54;
+    margin-bottom: 1rem;
+  }
+  
+  .about__card p {
+    color: #a0a0a0;
+  }
+  
+  /* Team Section */
+  .team__section {
+    background-color: #1a1d24;
+    padding: 6rem 0;
+  }
+  
+  .about__team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 3rem;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .about__team-card {
+    background-color: #111317;
+    border-radius: 15px;
+    overflow: hidden;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+  }
+  
+  .about__team-card:hover {
+    transform: translateY(-10px);
+  }
+  
+  .team-card__image-container {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .about__team-card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  
+  .about__team-card:hover img {
+    transform: scale(1.1);
+  }
+  
+  .team-card__content {
+    padding: 2rem;
+  }
+  
+  .about__team-card h5 {
+    font-size: 1.5rem;
+    color: #f9ac54;
+    margin-bottom: 0.5rem;
+  }
+  
+  .about__team-card p {
+    color: #a0a0a0;
+  }
+  
+  /* Testimonials Section */
+  .about__testimonials {
+    background-color: #111317;
+    padding: 6rem 0;
+  }
+  
+  .about__testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .about__testimonial-card {
+    background-color: #1a1d24;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+  }
+  
+  .about__testimonial-card:hover {
+    transform: translateY(-10px);
+  }
+  
+  .about__testimonial-card p {
+    color: #a0a0a0;
+    font-style: italic;
+    position: relative;
+    padding: 0 1.5rem;
+  }
+  
+  .about__testimonial-card p::before,
+  .about__testimonial-card p::after {
+    content: '"';
+    font-size: 4rem;
+    color: #f9ac54;
+    position: absolute;
+    opacity: 0.3;
+  }
+  
+  .about__testimonial-card p::before {
+    top: -20px;
+    left: -10px;
+  }
+  
+  .about__testimonial-card p::after {
+    bottom: -50px;
+    right: -10px;
+  }
+  
+  /* Reviews Section */
+  .reviews__section {
+    background-color: #1a1d24;
+    padding: 6rem 0;
+  }
+  
+  .reviews__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto 4rem;
+  }
+  
+  .review__card {
+    background-color: #111317;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+  }
+  
+  .review__card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .review__card h5 {
+    color: #f9ac54;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .review__card p {
+    color: #a0a0a0;
+    margin-bottom: 1rem;
+  }
+  
+  .rating {
+    color: #f9ac54;
+    font-size: 1.2rem;
+  }
+  
+  /* Comment Section */
+  .comment__section {
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .comment__section h5 {
+    color: #f9ac54;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .comment__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .comment__form input,
+  .comment__form textarea {
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid #a0a0a0;
+    background-color: #111317;
+    color: #ffffff;
+  }
+  
+  .comment__form button {
+    padding: 0.5rem 1rem;
+    background-color: #f9ac54;
+    color: #111317;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .comment__form button:hover {
+    background-color: #ffc107;
+  }
+  
+  .comments__list {
+    margin-top: 2rem;
+  }
+  
+  .user__comment {
+    background-color: #111317;
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+  }
+  
+  .user__comment h6 {
+    color: #f9ac54;
+    margin-bottom: 0.5rem;
+  }
+  
+  .user__comment p {
+    color: #a0a0a0;
+  }
+  
+  /* Static Comments */
+  .static__comment {
+    border: 1px solid #f9ac54;
+    background-color: rgba(249, 172, 84, 0.1);
+  }
+  
+  .static__comment h6 {
+    color: #ffc107;
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(-50px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  
+  @keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  
+  .fade-in {
+    animation: fadeIn 1s ease-out forwards;
+  }
+  
+  .slide-in {
+    animation: slideIn 1s ease-out forwards;
+  }
+  
+  .scale-in {
+    animation: scaleIn 0.8s ease-out forwards;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .section__header {
+      font-size: 2.5rem;
+    }
+  
+    .section__subheader {
+      font-size: 1rem;
+    }
+  
+    .about__grid,
+    .about__team-grid,
+    .about__testimonials-grid,
+    .reviews__grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .about__card,
+    .about__team-card,
+    .about__testimonial-card,
+    .review__card {
+      max-width: 400px;
+      margin: 0 auto;
+    }
+  }
