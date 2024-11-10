@@ -1,49 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "../Style/Community.css";
-
-const aboutData = [
-  {
-    img: "/placeholder.svg?height=200&width=300",
-    title: "Our Mission",
-    description: "At FitClub, we believe that fitness is a journey, not a destination. Our mission is to provide a supportive community and expert guidance to help you achieve your fitness goals.",
-  },
-  {
-    img: "/placeholder.svg?height=200&width=300",
-    title: "Our Story",
-    description: "FitClub was founded by a group of passionate fitness enthusiasts who wanted to create a space without the intimidation of a traditional gym.",
-  },
-  {
-    img: "/placeholder.svg?height=200&width=300",
-    title: "Our Values",
-    description: "We value community, inclusivity, and results-driven training. Fitness should be accessible to everyone.",
-  },
-];
-
-const teamData = [
-  { img: "/images/S1.jpg", name: "John Doe", role: "Founder & CEO" },
-  { img: "/images/S2.avif", name: "Jane Smith", role: "Head Trainer" },
-  { img: "/images/S3.jpg", name: "Bob Johnson", role: "Operations Manager" },
-];
-
-const testimonialData = [
-  "FitClub has changed my life. The community is so supportive and the trainers are amazing.",
-  "I was hesitant to join a gym, but FitClub has been a game-changer.",
-  "FitClub is more than just a gym - it's a community. I've made lifelong friends.",
-];
-
-const randomReviews = [
-  { name: "Sarah L.", comment: "The facilities are top-notch and always clean. I love the variety of classes offered!", rating: 5 },
-  { name: "Mike R.", comment: "Trainers here are knowledgeable and motivating. They've helped me achieve goals I never thought possible.", rating: 5 },
-  { name: "Emily K.", comment: "Great atmosphere and friendly staff. It's my favorite place to work out!", rating: 4 },
-  { name: "David W.", comment: "The 24/7 access is super convenient for my schedule. Highly recommend!", rating: 5 },
-  { name: "Lisa M.", comment: "I've tried many gyms, but FitClub stands out with its community feel and excellent equipment.", rating: 4 },
-];
-
-const staticComments = [
-  { name: "John D.", comment: "I've been a member for 2 years now, and I can't imagine working out anywhere else!", isStatic: true },
-  { name: "Emma S.", comment: "The personal training sessions have been life-changing. Highly recommend!", isStatic: true },
-  { name: "Alex M.", comment: "Love the variety of classes. There's always something new to try!", isStatic: true },
-];
+import data from './data.json';
 
 const AboutSection = () => {
   const sectionRef = useRef(null);
@@ -78,7 +35,7 @@ const AboutSection = () => {
         <p className="section__subheader">Get to know our story, mission, and values</p>
       </div>
       <div className="about__grid">
-        {aboutData.map((card, index) => (
+        {data.aboutData.map((card, index) => (
           <div key={index} className="about__card">
             <div className="card__image-container">
               <img src={card.img} alt={card.title} />
@@ -124,7 +81,7 @@ const TeamSection = () => {
     <section ref={teamRef} className="team__section">
       <h4 className="section__header">Meet Our Team</h4>
       <div className="about__team-grid">
-        {teamData.map((member, index) => (
+        {data.teamData.map((member, index) => (
           <div key={index} className="about__team-card">
             <div className="team-card__image-container">
               <img src={member.img} alt={member.name} />
@@ -170,7 +127,7 @@ const TestimonialsSection = () => {
     <div ref={testimonialRef} className="about__testimonials">
       <h4 className="section__header">What Our Members Say</h4>
       <div className="about__testimonials-grid">
-        {testimonialData.map((testimonial, index) => (
+        {data.testimonialData.map((testimonial, index) => (
           <div key={index} className="about__testimonial-card">
             <p>{testimonial}</p>
           </div>
@@ -181,13 +138,13 @@ const TestimonialsSection = () => {
 };
 
 const ReviewsSection = () => {
-  const [comments, setComments] = useState([...staticComments]);
+  const [comments, setComments] = useState([...data.staticComments]);
   const [newComment, setNewComment] = useState({ name: '', comment: '' });
   const reviewsRef = useRef(null);
 
   useEffect(() => {
     const storedComments = JSON.parse(localStorage.getItem('gymComments')) || [];
-    setComments([...staticComments, ...storedComments]);
+    setComments([...data.staticComments, ...storedComments]);
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -232,7 +189,7 @@ const ReviewsSection = () => {
     <section ref={reviewsRef} className="reviews__section">
       <h4 className="section__header">Gym Reviews</h4>
       <div className="reviews__grid">
-        {randomReviews.map((review, index) => (
+        {data.randomReviews.map((review, index) => (
           <div key={index} className="review__card">
             <h5>{review.name}</h5>
             <p>{review.comment}</p>

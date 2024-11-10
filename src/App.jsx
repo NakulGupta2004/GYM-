@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Use Routes instead of Switch
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useState } from 'react';
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -13,14 +13,18 @@ function App() {
 
   return (
     <Router>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} /> {/* Use element prop with component */}
-        <Route path="/services" element={<Services />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/Community" element={<Community />} />
-      </Routes>
-      <Footer />
+      <div className="app-wrapper">
+        <Header />
+        <main className="main-content">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/community" element={<Community />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
     </Router>
   );
 }

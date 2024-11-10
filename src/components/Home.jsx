@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import '../Style/program.css'
 import '../Style/styles.css'
-import Intro from './Intro'
 
-import  { useEffect } from "react";
+export default function Home() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: ''
+  });
+  const [showToast, setShowToast] = useState(false);
 
-const Home = () => {
   useEffect(() => {
     const fadeInPage = () => {
       let body = document.body;
@@ -46,24 +51,59 @@ const Home = () => {
         fadeOutPage(targetUrl);
       });
     });
+
+    const revealSections = () => {
+      const sections = document.querySelectorAll('.section__container');
+      sections.forEach((section) => {
+        const sectionTop = section.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        if (sectionTop < windowHeight * 0.75) {
+          section.classList.add('reveal');
+        }
+      });
+    };
+
+    window.addEventListener('scroll', revealSections);
+    revealSections();
+
+    return () => {
+      window.removeEventListener('scroll', revealSections);
+    };
   }, []);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prevData => ({
+      ...prevData,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsModalOpen(false);
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 3000);
+    setFormData({ name: '', email: '', phone: '' });
+  };
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
 
   return (
     <div>
-
-
       <header className="section__container header__container">
         <div className="header__content">
-          <h4>BEST FITNESS IN THE TOWN</h4>
-          <h1><span>MAKE</span> YOUR BODY SHAPE</h1>
-          <p>
+          <h4 className="animate-slide-up">BEST FITNESS IN THE TOWN</h4>
+          <h1 className="animate-slide-up"><span>MAKE</span> YOUR BODY SHAPE</h1>
+          <p className="animate-slide-up">
             Unleash your potential and embark on a journey towards a stronger,
             fitter, and more confident you. Sign up for 'Make Your Body Shape' now
             and witness the incredible transformation your body is capable of!
           </p>
-          <a href="register.html"><button className="btn">Get Started</button></a>
+          <button className="btn animate-slide-up" onClick={openModal}>Get Started</button>
         </div>
-        <div className="header__image">
+        <div className="header__image animate-fade-in">
           <img src="images/header.png" alt="header" />
         </div>
       </header>
@@ -73,56 +113,30 @@ const Home = () => {
           <h2 className="section__header">EXPLORE OUR PROGRAM</h2>
         </div>
         <div className="explore__grid">
-          <div className="explore__card">
-            <h4>Strength :</h4>
-            <p>
-              Embrace the essence of strength as we delve into its various
-              dimensions: physical, mental, and emotional.
-            </p>
-            <a href="register.html">Join Now</a>
-          </div>
-          <div className="explore__card">
-            <h4>Physical Fitness :</h4>
-            <p>
-              It encompasses a range of activities that improve health, strength,
-              flexibility, and overall well-being.
-            </p>
-            <a href="register.html">Join Now</a>
-          </div>
-          <div className="explore__card">
-            <h4>Fat Loss :</h4>
-            <p>
-              Through a combination of workout routines and expert guidance, we'll
-              empower you to reach your goals.
-            </p>
-            <a href="register.html">Join Now</a>
-          </div>
-          <div className="explore__card">
-            <h4>Weight Gain :</h4>
-            <p>
-              Designed for individuals, our program offers an effective approach
-              to gaining weight in a sustainable manner.
-            </p>
-            <a href="register.html">Join Now </a>
-          </div>
+          {['Strength', 'Physical Fitness', 'Fat Loss', 'Weight Gain'].map((title, index) => (
+            <div key={index} className="explore__card animate-pop-in" style={{animationDelay: `${index * 0.1}s`}}>
+              <h4>{title} :</h4>
+              <p>
+                Our {title.toLowerCase()} program is designed to help you achieve your fitness goals effectively and safely.
+              </p>
+              <button onClick={openModal} className="btn">Join Now</button>
+            </div>
+          ))}
         </div>
       </section>
 
       <section className="section__container class__container">
-        <div className="class__image">
+        <div className="class__image animate-slide-in-left">
           <img src="images/class-1.jpg" alt="class" className="class__img-1" />
         </div>
-        <div className="class__content">
+        <div className="class__content animate-slide-in-right">
           <h2 className="section__header">THE CLASS YOU WILL GET HERE</h2>
           <p>
             Led by our team of expert and motivational instructors, "The Class You
             Will Get Here" is a high-energy, results-driven session that combines
-            a perfect blend of cardio, strength training, and functional
-            exercises. Each class is carefully curated to keep you engaged and
-            challenged, ensuring you never hit a plateau in your fitness
-            endeavors.
+            a perfect blend of cardio, strength training, and functional exercises.
           </p>
-          <button className="btn">Book A Class</button>
+          <button onClick={openModal} className="btn">Book A Class</button>
         </div>
       </section>
 
@@ -132,27 +146,21 @@ const Home = () => {
           Our diverse membership base creates a friendly and supportive
           atmosphere, where you can make friends and stay motivated.
         </p>
-        <div className="join__image">
+        <div className="join__image animate-scale-in">
           <img src="images/join.jpg" alt="Join" />
           <div className="join__grid">
-            <div className="join__card">
-              <div className="join__card__content">
-                <h4>1. Personal Trainer</h4>
-                <p>Unlock your potential with our expert Personal Trainers.</p>
+            {[
+              { title: "1. Personal Trainer", desc: "Unlock your potential with our expert Personal Trainers." },
+              { title: "2. Practice Sessions", desc: "Elevate your fitness with practice sessions. Be the best." },
+              { title: "3. Good Management", desc: "Supportive management, for your fitness success." }
+            ].map((item, index) => (
+              <div key={index} className="join__card animate-float" style={{animationDelay: `${index * 0.2}s`}}>
+                <div className="join__card__content">
+                  <h4>{item.title}</h4>
+                  <p>{item.desc}</p>
+                </div>
               </div>
-            </div>
-            <div className="join__card">
-              <div className="join__card__content">
-                <h4>2. Practice Sessions</h4>
-                <p>Elevate your fitness with practice sessions. Be the best.</p>
-              </div>
-            </div>
-            <div className="join__card">
-              <div className="join__card__content">
-                <h4>3. Good Management</h4>
-                <p>Supportive management, for your fitness success.</p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -164,48 +172,82 @@ const Home = () => {
           cater to different preferences and fitness aspirations.
         </p>
         <div className="price__grid">
-          <div className="price__card">
-            <div className="price__card__content">
-              <h4>Weekly Plan</h4>
-              <h3>Rs. 500</h3>
-              <p>Smart workout plan</p>
-              <p>At-home workouts</p>
+          {[
+            { title: "Weekly Plan", price: "Rs. 500", features: ["Smart workout plan", "At-home workouts"] },
+            { title: "Monthly Plan", price: "Rs. 2000", features: ["PRO Gyms", "Smart workout plan", "At-home workouts"] },
+            { title: "Yearly Plan", price: "Rs. 8500", features: ["ELITE Gyms & Classes", "PRO Gyms", "Smart workout plan", "At-home workouts", "Personal Training"] }
+          ].map((plan, index) => (
+            <div key={index} className="price__card animate-flip" style={{animationDelay: `${index * 0.2}s`}}>
+              <div className="price__card__content">
+                <h4>{plan.title}</h4>
+                <h3>{plan.price}</h3>
+                {plan.features.map((feature, i) => (
+                  <p key={i}>{feature}</p>
+                ))}
+              </div>
+              <button onClick={openModal} className="btn price__btn">Join Now</button>
             </div>
-            <button className="btn price__btn"><a href="register.html">Join Now</a></button>
-          </div>
-          <div className="price__card">
-            <div className="price__card__content">
-              <h4>Monthly Plan</h4>
-              <h3>Rs. 2000</h3>
-              <p>PRO Gyms</p>
-              <p>Smart workout plan</p>
-              <p>At-home workouts</p>
-            </div>
-            <button className="btn price__btn"><a href="register.html">Join Now</a></button>
-          </div>
-          <div className="price__card">
-            <div className="price__card__content">
-              <h4>Yearly Plan</h4>
-              <h3>Rs. 8500</h3>
-              <p>ELITE Gyms & Classes</p>
-              <p>PRO Gyms</p>
-              <p>Smart workout plan</p>
-              <p>At-home workouts</p>
-              <p>Personal Training</p>
-            </div>
-            <button className="btn price__btn"><a href="register.html">Join Now</a></button>
-          </div>
+          ))}
         </div>
       </section>
 
 
 
-      <div className="footer__credits">
-        <p>Designed and developed by Nakul Gupta</p>
-      </div>
+      {isModalOpen && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <h2>Join Our Fitness Program</h2>
+            <p>Fill in your details and we'll contact you soon with more information.</p>
+            <form onSubmit={handleSubmit}>
+              <div className="form-group">
+                <label htmlFor="name">Name</label>
+                <input
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  required
+                  placeholder="Enter your name"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="email">Email</label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  required
+                  placeholder="Enter your email"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="phone">Phone</label>
+                <input
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                  required
+                  placeholder="Enter your phone number"
+                />
+              </div>
+              <div className="form-actions">
+                <button type="button" className="btn btn-secondary" onClick={closeModal}>Cancel</button>
+                <button type="submit" className="btn btn-primary">Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {showToast && (
+        <div className="toast">
+          Form Submitted! Our team will contact you soon.
+        </div>
+      )}
     </div>
   );
 }
-
-export default Home;
-

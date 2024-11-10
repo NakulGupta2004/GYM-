@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FaWifi, FaDumbbell, FaAppleAlt, FaRunning, FaHotTub, FaLock } from 'react-icons/fa';
 
 import '../Style/Services.css'
+// import '../Style/styles.css'
 
 const ServiceCard = ({ icon: Icon, title, description }) => (
   <div className="service-card">
